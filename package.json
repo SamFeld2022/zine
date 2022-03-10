@@ -1,0 +1,85 @@
+{
+  "name": "bindery",
+  "version": "2.3.6",
+  "description": "Book layout in the browser",
+  "main": "dist/bindery.cjs.js",
+  "module": "dist/bindery.esm.js",
+  "browser": "dist/bindery.umd.js",
+  "unpkg": "dist/bindery.min.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/evnbr/bindery.git"
+  },
+  "dependencies": {
+    "regionize": "^0.1.7"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-typescript": "^7.12.7",
+    "@babel/runtime": "^7.12.5",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^22.4.4",
+    "codecov": "^3.8.1",
+    "cssnano": "^4.1.10",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3",
+    "node-sass": "^4.14.1",
+    "postcss": "^7.0.35",
+    "postcss-class-prefix": "^0.3.0",
+    "prettier": "1.19.1",
+    "rollup": "^1.32.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.9.0",
+    "rollup-plugin-sass": "^1.2.2",
+    "rollup-plugin-sizes": "^0.5.1",
+    "rollup-plugin-terser": "^5.3.1",
+    "typescript": "^3.9.7"
+  },
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "npm run package:prod && npm run clean",
+
+    "dev": "tsc",
+    "postdev": "npm run package:dev && npm run clean",
+
+    "package:dev": "rollup -c --environment BUILD:dev",
+    "package:prod": "rollup -c --environment BUILD:prod",
+
+    "test": "jest",
+    "test:ci": "npm run coverage && ./node_modules/.bin/codecov",
+
+    "clean": "rimraf build",
+    "postclean": "cp dist/bindery.umd.js docs/bindery_local_build.js",
+
+    "coverage": "jest --coverage",
+    "docs": "cd docs && jekyll serve"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/src/**.{js,jsx}",
+      "**/src/**.{ts,tsx}",
+      "!**/node_modules/**"
+    ]
+  },
+  "keywords": [
+    "book",
+    "pagination",
+    "print"
+  ],
+  "author": {
+    "name": "Evan Brooks",
+    "url": "https://evanbrooks.info"
+  },
+  "license": "MIT"
+}
